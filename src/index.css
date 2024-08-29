@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .option-style {
+    @apply w-[43px] h-[24px] p-[4px_8px] gap-[8px] rounded-[4px] bg-[#EBFAE2]
+  }
+}
