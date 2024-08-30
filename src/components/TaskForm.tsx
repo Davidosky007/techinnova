@@ -25,14 +25,16 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSave, onClose }) => {
       description,
       state: 'todo',
       priority,
+      image,  // Include the image in the task object
     };
     onSave(newTask);
     setTitle('');
     setDescription('');
+    setPriority('');
     setDeadline('');
     setTime('');
     setImage(null);
-    onClose(); // Close the modal after saving the task
+    onClose();
   };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +77,6 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSave, onClose }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Task Description"
-            required
             className="border focus:outline-none w-[453px] h-[96px] p-[16px_14px] gap-[8px] rounded-[12px] border-t border-r border-b border-l border-[#D0D5DD] text-[#848585] bg-[#FFFFFF]"
           />
         </div>
@@ -116,21 +117,17 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSave, onClose }) => {
             </div>
           ) : (
             <div className="w-full h-32 p-4 rounded-lg border border-[#E4E7EC] bg-white flex items-center gap-4">
-                <img src={URL.createObjectURL(image)} alt="Uploaded Preview" className="w-[187px] h-[87px] rounded-t-[4px] border-t border-r border-l border-[#D0D5DD]" />
-                <div className="flex flex-col items-left justify-center">
-
-              <p className="text-[#344054] font-inter text-sm font-medium leading-5 text-left">{image.name}</p>
-              <p className="font-inter text-sm font-normal leading-5 text-left text-[#667085]">Size: {Math.round(image.size / 1024)} KB</p>
-              <div className="w-[194px] flex items-center justify-center gap-[12px] mt-3 rounded-full h-2.5 mb-2">
-                    <div className="bg-[#4F35F3] h-2.5 rounded-full" style={{ width: '80%' }}></div>
-                    <span className='font-inter text-sm font-medium leading-[20px] text-left text-[#344054]'>100%</span>
-              </div>
+              <img src={URL.createObjectURL(image)} alt="Uploaded Preview" className="w-[187px] h-[87px] rounded-t-[4px] border-t border-r border-l border-[#D0D5DD]" />
+              <div className="flex flex-col items-left justify-center">
+                <p className="text-[#344054] font-inter text-sm font-medium leading-5 text-left">{image.name}</p>
+                <p className="font-inter text-sm font-normal leading-5 text-left text-[#667085]">Size: {Math.round(image.size / 1024)} KB</p>
+                <div className="w-[194px] flex items-center justify-center gap-[12px] mt-3 rounded-full h-2.5 mb-2">
+                  <div className="bg-[#4F35F3] h-2.5 rounded-full" style={{ width: '80%' }}></div>
+                  <span className='font-inter text-sm font-medium leading-[20px] text-left text-[#344054]'>100%</span>
                 </div>
-              <button
-                onClick={() => setImage(null)}
-                className=""
-                >
-                  <img src={deleteIcon} alt="Close Icon" className="w-[40px] h-[40px]" />
+              </div>
+              <button onClick={() => setImage(null)}>
+                <img src={deleteIcon} alt="Close Icon" className="w-[40px] h-[40px]" />
               </button>
             </div>
           )}
@@ -138,28 +135,25 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSave, onClose }) => {
         <div className='flex gap-4'>
           <div className='gap-[6px] flex flex-col'>
             <p className='font-inter text-[14px] font-medium leading-[20px] text-[#1A1919] text-left'>Deadline</p>
-        <input
-          type="date"
-          value={deadline}
-          onChange={(e) => setDeadline(e.target.value)}
-          className="p-2 border border-gray-300 rounded-[12px] focus:outline-none w-[219px]"
-        />
+            <input
+              type="date"
+              value={deadline}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="p-2 border border-gray-300 rounded-[12px] focus:outline-none w-[219px]"
+            />
           </div>
           <div className='gap-[6px] flex flex-col'>
-            <p className='font-inter text-[14px] font-medium leading-[20px] text-[#1A1919] text-left'>Deadline</p>  
-        <input
-          type="time"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          className="p-2 border border-gray-300 rounded-[12px] focus:outline-none w-[219px]"
-        />
+            <p className='font-inter text-[14px] font-medium leading-[20px] text-[#1A1919] text-left'>Time</p>
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              className="p-2 border border-gray-300 rounded-[12px] focus:outline-none w-[219px]"
+            />
           </div>
         </div>
-        <button
-          type="submit"
-          className="p-2 h-[48px] bg-[#4F35F3] text-white rounded-[12px] hover:bg-blue-600"
-        >
-          Update
+        <button type="submit" className="w-full h-[44px] flex items-center justify-center gap-[8px] p-[10px_18px] rounded-[8px] bg-[#7F56D9] shadow-sm shadow-[0px 1px 2px rgba(16, 24, 40, 0.05)]">
+          <p className="font-inter text-[14px] font-semibold leading-5 text-[#FCFCFD] text-center">Update</p>
         </button>
       </form>
     </div>

@@ -7,3 +7,10 @@
     @apply w-[43px] h-[24px] p-[4px_8px] gap-[8px] rounded-[4px] bg-[#EBFAE2]
   }
 }
+
+/* src/index.css */
+
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}

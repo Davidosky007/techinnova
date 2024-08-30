@@ -1,16 +1,23 @@
-// src/services/taskService.ts
-
 import { Task } from '../utils/taskType';
 
 const STORAGE_KEY = 'tasks';
 
 export const getTasks = (): Task[] => {
-  const tasks = localStorage.getItem(STORAGE_KEY);
-  return tasks ? JSON.parse(tasks) : [];
+  try {
+    const tasks = localStorage.getItem(STORAGE_KEY);
+    return tasks ? JSON.parse(tasks) : [];
+  } catch (error) {
+    console.error('Failed to get tasks:', error);
+    return [];
+  }
 };
 
 export const saveTasks = (tasks: Task[]): void => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  } catch (error) {
+    console.error('Failed to save tasks:', error);
+  }
 };
 
 export const addTask = (task: Task): void => {
